@@ -54,3 +54,10 @@ We cannot directly alter the `.dat` files if have a changing geometry. Therefore
 4. Marc and Mentat create alot of files. I try to keep a folder where all of these are placed to avoid bloating my working directory.
 5. Marc and mentat will dump thier files within the directory the files are called from, i.e., where the .proc file is located when run.
 6. I append all the commands to create model into a single .proc file. This is the most efficient way I have found to generate a lot of .dat files in the case of a Monte-Carlo simulation scenario.
+
+### Getting py_post and py_mentat to work.
+
+* Mentat requires the use of python 3.8.
+* The py_mentat and py_post files need to be placed in the system path, or they can be placed in the Anacondas virtual environment. If both of these fail the files can just be placed in the directory from which the script calling them is being run.
+* On Windows the files are located at `C:\Program Files\MSC.Software\Marc\2021.4.0\mentat2021.4\shlib\win64`.
+
