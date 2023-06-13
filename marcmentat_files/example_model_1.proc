@@ -1,0 +1,86 @@
+*new_model yes
+*set_model_analysis_dimension planar
+*set_solid_type sheet_rect
+*add_solids 0 0 0 25 25
+*set_solid_type sheet_arb_poly
+*add_solids 18.354101966249686 16.118033988749893 0 11.645898033750315 16.118033988749893 0 11.645898033750315 13.881966011250105 0 18.354101966249686 13.881966011250105 0
+#
+*solids_subtract 1 
+2
+#
+*add_nodes 0 0 0 25 0 0 25 25 0 0 25 0
+*add_nodes 18.354101966249686 16.118033988749893 0
+*add_nodes 11.645898033750315 16.118033988749893 0
+*add_nodes 11.645898033750315 13.881966011250105 0
+*add_nodes 18.354101966249686 13.881966011250105 0
+@set($automesh_surface_desc,sheet)
+@set($automesh_surface_family,quad)
+@set($automesh_surface_order,linear)
+*pt_set_target_element_size_method manual
+*pt_set_global_element_size_sheet 0.5
+*pt_mesh_sheet linear quad
+solid1 #
+*sweep_nodes all_existing #
+*new_apply *apply_type fixed_displacement
+*apply_dof x *apply_dof_value x 0.0
+*apply_dof y *apply_dof_value y 0.0
+*add_apply_nodes 1 #
+*new_apply *apply_type fixed_displacement
+*apply_dof x *apply_dof_value x 0.0
+*add_apply_nodes 4 #
+*new_mater standard *mater_option general:state:solid
+*mater_option general:skip_structural:off
+*mater_option structural:type:ogden
+*mater_param structural:ogden_nterm 3
+*mater_param structural:ogden_modulus_1 0.024361
+*mater_param structural:ogden_modulus_2 6.6703e-5
+*mater_param structural:ogden_modulus_3 4.5381e-4
+*mater_param structural:ogden_exp_1 1.7138
+*mater_param structural:ogden_exp_2 7.0697
+*mater_param structural:ogden_exp_3 -3.3659
+*mater_option structural:volum_behav:series
+*mater_param structural:vol_strn_nrg_coef_d_1 3.2587
+*add_mater_elements all_existing
+*new_geometry *geometry_type mech_planar_pstrain 
+*geometry_param norm_to_plane_thick 0.002
+*add_geometry_elements all_existing
+*new_pre_defined_table linear_ramp_time
+*select_method_path
+*select_clear_nodes
+*select_clear_edges
+*select_edges 5 6 #
+*select_edges 6 7 #
+*select_edges 7 8 #
+*select_edges 8 5 #
+*new_apply *apply_type edge_load
+*apply_option edge_load_mode:area
+*apply_dof p *apply_dof_value p
+*apply_dof_value p 0.025
+*apply_dof_table p linear_ramp_time1
+*add_apply_edges all_selected #
+*new_cbody mesh *contact_option state:solid
+*contact_option skip_structural:off
+*add_contact_body_elements all_existing
+*new_contact_table
+*ctable_set_default_touch
+*new_loadcase *loadcase_type struc:static
+*loadcase_value time 1
+*loadcase_option stepping:multicriteria
+*loadcase_value desired 30
+*loadcase_value maxrec 100
+*loadcase_value minfraction 0.0001
+*loadcase_option procedure:modifiednr
+*loadcase_option converge:resid_and_disp
+*loadcase_value force 0.001
+*loadcase_value displacement 0.001
+*loadcase_ctable ctable1
+*new_job structural
+*add_job_loadcases lcase1
+*job_option nod_quantities:manual
+*job_option follow:on
+*add_post_nodal_quantity Displacement
+*add_post_tensor log_strain
+*job_option strain:large
+*job_contact_table ctable1
+*element_type 118 all_existing
+*write_marc 'example_model_1.dat' yes
