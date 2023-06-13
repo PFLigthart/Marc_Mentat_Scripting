@@ -45,7 +45,7 @@ Mentat can create a polygon by placing node points in a specified winding order.
 ### Creating the model in Mentat using .proc files.
 We cannot directly alter the `.dat` files if have a changing geometry. Therefore we will create a `.proc` file and let mentat set up the model for us in the background using `mentat -bg <file_name>.proc`.
     1. The `-bg` flag can be left out and then mentat will open and all the commands will be generated in the GUI. This is usefull to see whats actaully happening.
-    2. When generating many `.dat` files I have found it more efficient to combine all the `.proc' files into one and then just run it. I have set the `.proc` files up in such a way that this is possible. The `.proc` files close and open the required models as needed.
+    2. When generating many `.dat` files I have found it more efficient to combine all the `.proc` files into one and then just run it. I have set the `.proc` files up in such a way that this is possible. The `.proc` files close and open the required models as needed.
 ## Tips and Tricks
 
 1. When passing nodes to mentat to create a polygon, the order in which they are passed is important. The nodes must be passed in a clockwise/counterclockwise order (not sure which one). If you pass the nodes in the wrong order, mentat will give an error. A simple solution to this is to check if the area of the polygon is negative when using the shoelace area formula. This is especially usefull when working with irregulat polygons with many nodes.
