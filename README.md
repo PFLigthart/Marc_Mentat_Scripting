@@ -63,5 +63,5 @@ We cannot directly alter the `.dat` files if have a changing geometry. Therefore
 
 ### Running Marc and Mentat in the terminal
 * If the `run_marc` and `mentat` commands do not work in the terminal you need to add them to your system path.
-* The files (on Windows machine) are located at `C:\Program Files\MSC.Software\Marc\2021.4.0\marc2021.4\bin\win64i8` and `C:\Program Files\MSC.Software\Marc\2021.4.0\mentat2021.4\bin`
+* The files (on Windows machine) are located at `C:\Program Files\MSC.Software\Marc\2021.4.0\marc2021.4\tools` and `C:\Program Files\MSC.Software\Marc\2021.4.0\mentat2021.4\bin`
 
